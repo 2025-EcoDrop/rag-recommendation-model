@@ -11,9 +11,9 @@ import os
 router = APIRouter()
 IS_TEST = os.getenv("TEST_ENV") == "true"
 
-@router.post("/chat", response_model=QueryResponse)
-async def chat(request: QueryRequest, db: Session = Depends(deps.get_db)):
-    if not IS_TEST:
+if not IS_TEST:
+    @router.post("/chat", response_model=QueryResponse)
+    async def chat(request: QueryRequest, db: Session = Depends(deps.get_db)):
         query = request.query
 
         docs = [[]]
@@ -31,5 +31,3 @@ async def chat(request: QueryRequest, db: Session = Depends(deps.get_db)):
             answer=answer,
             sources=docs
         )
-
-    return "test"
