@@ -15,39 +15,37 @@ if not IS_TEST:
 
 async def embed_text(text: str) -> str | Tensor:
     if not IS_TEST:
-        return model.encode(text)
+        return "test"
 
-    return "test"
+    return model.encode(text)
 
 async def search_embed_text(db: Session, squery: str, k: int = 3):
     if not IS_TEST:
-        q_embed = await embed_text(squery)
+        return "test"
 
-        rows = (db.query(DrugEmbedding.id, DrugEmbedding.embedding)
-                .order_by(DrugEmbedding.embedding.op("<->")(q_embed.tolist()))  # L2 distance
-                .limit(k)
-                .all())
+    q_embed = await embed_text(squery)
 
-        return [row[0] for row in rows]
+    rows = (db.query(DrugEmbedding.id, DrugEmbedding.embedding)
+            .order_by(DrugEmbedding.embedding.op("<->")(q_embed.tolist())) # L2 distance
+            .limit(k)
+            .all())
 
-    return "test"
-
+    return [row[0] for row in rows]
 
 async def search_knowledge_base(db: Session, squery: str, k: int = 3):
     if not IS_TEST:
-        results = await search_embed_text(db, squery, k)
+        return "test"
 
-        rows = (db.query(Drug.company_name, Drug.product_name, Drug.efficacy, Drug.use, Drug.caution_warn, Drug.caution,
-                         Drug.interaction, Drug.side_effect)
-                .filter(Drug.id.in_(results))
-                .order_by(
-            sa.case(
-                {id_: index for index, id_ in enumerate(results)},
-                value=Drug.id
+    results = await search_embed_text(db, squery, k)
+
+    rows = (db.query(Drug.company_name, Drug.product_name, Drug.efficacy, Drug.use, Drug.caution_warn, Drug.caution, Drug.interaction, Drug.side_effect)
+            .filter(Drug.id.in_(results))
+            .order_by(
+                sa.case(
+                    {id_: index for index, id_ in enumerate(results)},
+                    value=Drug.id
+                )
             )
-        )
-                .all())
+            .all())
 
-        return [list(row) for row in rows]
-
-    return "test"
+    return [list(row) for row in rows]
