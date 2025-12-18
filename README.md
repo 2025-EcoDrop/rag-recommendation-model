@@ -4,10 +4,9 @@ FastAPI로 서버를 구성하고, 벡터 검색 결과를 LLM에 제공하여 �
 </br>
 
 ## ⚠️ 참고 사항
-- 본 API는 의료 진단을 대체하지 않습니다.  </br>
-- LLM 호출로 인해 응답 시간이 다소 길 수 있습니다.  </br>
+- 본 API는 의료 진단을 대체하지 않습니다.
+- LLM 호출로 인해 응답 시간이 다소 길 수 있습니다.
 </br>
-
 
 ## 📁 주요 파일 구조
 ```bash
@@ -23,6 +22,7 @@ rag-recommendation-model
 ├── requirements.txt
 └── README.md
 ```
+</br>
 
 ## ▶️ 실행
 ```bash
