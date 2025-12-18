@@ -15,7 +15,7 @@ rag-recommendation-model
 │   ├── database/        # 데이터 베이스와 연결
 │   ├── main.py          # FastAPI 앱 진입점
 │   ├── schemas.py       # Request / Response 모델
-│   ├── rag.py             # 임베딩 및 벡터 검색
+│   ├── rag.py           # 임베딩 및 벡터 검색
 │   ├── llm_model.py     # LLM 응답 생성 로직
 │   └── routes/
 │       └── chat.py      # /chat API
