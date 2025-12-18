@@ -5,11 +5,10 @@ IS_TEST = os.getenv("TEST_ENV") == "true"
 if not IS_TEST:
     from transformers import AutoTokenizer, AutoModelForCausalLM
 
-    model_name = "beomi/KoAlpaca-Polyglot-12.8B"
+    model_name = "saltlux/Ko-Llama3-Luxia-8B"
 
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModelForCausalLM.from_pretrained(model_name, device_map="auto")
-
 
 async def generate_answer(query: str, docs: list[list[str]]) -> str:
     if not IS_TEST:
@@ -27,7 +26,8 @@ async def generate_answer(query: str, docs: list[list[str]]) -> str:
             temperature=0.7,
             no_repeat_ngram_size=6,
             do_sample=True,
-            eos_token_id=2,
+            eos_token_id=tokenizer.eos_token_id,
+            top_p=0.9,
         )
 
         return tokenizer.decode(outputs[0], skip_special_tokens=True).replace(prompt, '')

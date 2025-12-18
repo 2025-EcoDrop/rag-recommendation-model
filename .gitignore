@@ -12,7 +12,7 @@ build/
 *.log
 
 .venv/
-env/
+.env/
 venv/
 
 .env
