@@ -6,6 +6,7 @@ FastAPI로 서버를 구성하고, 벡터 검색 결과를 LLM에 제공하여 �
 ## ⚠️ 참고 사항
 - 본 API는 의료 진단을 대체하지 않습니다.
 - LLM 호출로 인해 응답 시간이 다소 길 수 있습니다.
+  - GPU 환경에서도 처리 시간이 길어지기 때문에, rag.py의 search_knowledge_base 함수에서는 Drug.company_name과 Drug.product_name을 제외한 컬럼은 필요에 따라 제거하여 rows가 필요한 데이터만 받도록 구성하는 것을 권장합니다.
 </br>
 
 ## 📁 주요 파일 구조
