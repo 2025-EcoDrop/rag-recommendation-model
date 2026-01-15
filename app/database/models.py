@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, BIGINT
+from sqlalchemy import Column, String, BIGINT, ForeignKey
 from pgvector.sqlalchemy import Vector
 from sqlalchemy.orm import declarative_base
 
