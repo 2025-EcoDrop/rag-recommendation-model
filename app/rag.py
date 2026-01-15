@@ -23,7 +23,7 @@ async def search_embed_text(db: Session, squery: str, k: int = 3):
     if not IS_TEST:
         q_embed = await embed_text(squery)
 
-        rows = (db.query(DrugEmbedding.id, DrugEmbedding.embedding)
+        rows = (db.query(DrugEmbedding.id)
                 .order_by(DrugEmbedding.embedding.op("<->")(q_embed.tolist())) # L2 distance
                 .limit(k)
                 .all())
